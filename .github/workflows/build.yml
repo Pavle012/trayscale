@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all tags and metadata
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-4-dev libadwaita-1-dev gobject-introspection
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25.x'
+      - name: Build
+        run: |
+          version="$(git describe --tags --always)"
+          go build -v -trimpath -ldflags="-w -s -X 'deedles.dev/trayscale/internal/metadata.version=$version'" -o trayscale ./cmd/trayscale
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trayscale-linux-amd64
+          path: trayscale
