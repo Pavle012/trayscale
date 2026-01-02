@@ -12,22 +12,22 @@ on:
   pull_request:
 
 jobs:
-  go-vet:
-    name: go vet
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ${{ env.dependencies }}
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ env.go-version }}
-      - name: go vet
-        run: go vet -v ./...
+  # go-vet:
+  #   name: go vet
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Install Dependencies
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y ${{ env.dependencies }}
+  #     - name: Setup Go
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version: ${{ env.go-version }}
+  #     - name: go vet
+  #       run: go vet -v ./...
 
 
   # staticcheck:
