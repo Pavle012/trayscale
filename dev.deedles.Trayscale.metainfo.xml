@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-	<id>dev.deedles.Trayscale</id>
+	<id>dev.deedles.trayscale</id>
 
 	<name>Trayscale</name>
 	<summary>Unofficial GUI for Tailscale</summary>
